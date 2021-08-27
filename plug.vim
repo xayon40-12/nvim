@@ -131,10 +131,9 @@ require'nvim-treesitter.configs'.setup {
   },
   ensure_installed = {
     "toml",
-    "fish",
     "yaml",
-    "swift",
-    "html",
+    "cpp",
+    "c",
     "haskell",
     "java",
     "rust",
