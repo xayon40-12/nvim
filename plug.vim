@@ -100,6 +100,16 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+nvim_lsp.texlab.setup {
+  settings = {
+    texlab = {
+      build = {
+        onSave = true
+      }
+    }
+  }
+}
+
 nvim_lsp.rls.setup {
   settings = {
     rust = {
