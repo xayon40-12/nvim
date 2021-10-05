@@ -22,14 +22,18 @@ Plug 'sgur/vim-textobj-parameter'
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'
   Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'nvim-neorg/neorg'
+  "Plug 'nvim-lua/completion-nvim'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
-  Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'mfussenegger/nvim-jdtls'
+  Plug 'chrisbra/unicode.vim'
   "Plug 'kristijanhusak/defx-git'
   "Plug 'kristijanhusak/defx-icons'
   "Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -37,20 +41,52 @@ endif
 
 call plug#end()
 
-if has('nvim-0.5')
-  augroup lsp
-    au!
-    au FileType java lua require('jdtls').start_or_attach({cmd = {'java-lsp.sh'}, root_dir = require('jdtls.setup').find_root({'gradle.build', 'pom.xml'})})
-  augroup end
-endif
-
 lua << EOF
-local nvim_lsp = require('lspconfig')
 
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      -- For `vsnip` user.
+      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+
+      -- For `luasnip` user.
+      -- require('luasnip').lsp_expand(args.body)
+
+      -- For `ultisnips` user.
+      -- vim.fn["UltiSnips#Anon"](args.body)
+    end,
+  },
+  mapping = {
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    --['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = "neorg" },
+
+    -- For vsnip user.
+    -- { name = 'vsnip' },
+
+    -- For luasnip user.
+    -- { name = 'luasnip' },
+
+    -- For ultisnips user.
+    -- { name = 'ultisnips' },
+
+    { name = 'buffer' },
+  }
+})
+
+
+
+local nvim_lsp = require('lspconfig')
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  require'completion'.on_attach(client, bufnr)
+  --require'completion'.on_attach(client, bufnr)
+
 
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -93,6 +129,7 @@ end
 local servers = { "hls", "rls", "texlab" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
@@ -129,6 +166,14 @@ saga.init_lsp_saga {
   border_style = "round",
 }
 
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+parser_configs.norg = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg",
+        files = { "src/parser.c", "src/scanner.cc" },
+        branch = "main"
+    },
+}
 require'nvim-treesitter.install'.compilers = { "gcc" }
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -140,6 +185,7 @@ require'nvim-treesitter.configs'.setup {
     disable = {},
   },
   ensure_installed = {
+    "norg",
     "toml",
     "yaml",
     "cpp",
@@ -162,5 +208,30 @@ require('telescope').setup{
   }
 }
 
+require('neorg').setup {
+    -- Tell Neorg what modules to load
+    load = {
+        ["core.defaults"] = {}, -- Load all the default modules
+        ["core.keybinds"] = { -- Configure core.keybinds
+            config = {
+                default_keybinds = true, -- Generate the default keybinds
+                neorg_leader = "<Leader>o" -- This is the default if unspecified
+            }
+        },
+        ["core.norg.concealer"] = {}, -- Allows for use of icons
+        ["core.norg.dirman"] = { -- Manage your directories with Neorg
+            config = {
+                workspaces = {
+                    my_workspace = "~/notes"
+                }
+            }
+        },
+        ["core.norg.completion"] = {
+          config = {
+            engine = "nvim-cmp" -- We current support nvim-compe and nvim-cmp only
+          }
+        },
+    },
+}
 
 EOF
