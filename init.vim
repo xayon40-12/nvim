@@ -34,7 +34,7 @@ set hidden              " permit to change file without saving the current one
 set display+=lastline
 set wildmenu            " display menu when searching
 set ruler               " show the cursor position all the time
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noinsert,noselect
 set shortmess+=c
 "let loaded_matchparen = 1
 set shell=zsh
@@ -90,8 +90,10 @@ if !empty(filedir) | exec "cd ".gitdir | endif
 set viewoptions=cursor,folds,slash,unix
 if !empty(gitdir) | exec "set viewdir=".gitdir."/.git/view" | endif
 
-set path+=**
-set wildignore+=**/target/**
+if !empty(filedir)
+  set path+=**
+  set wildignore+=**/target/**
+endif
 
 " create tag file
 "if empty(gitdir)
@@ -129,9 +131,7 @@ au BufNewFile,BufRead *.flow set filetype=javascript
 
 set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md
 
-autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
-autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+"autocmd FileType norg setlocal shiftwidth=1 tabstop=1
 
 "}}}
 
