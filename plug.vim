@@ -18,6 +18,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 Plug 'sgur/vim-textobj-parameter'
+Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
 
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'
@@ -174,7 +175,9 @@ parser_configs.norg = {
         branch = "main"
     },
 }
-require'nvim-treesitter.install'.compilers = { "gcc" }
+if vim.fn.has('macunix') then
+  require'nvim-treesitter.install'.compilers = { "gcc-11" }
+end
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
