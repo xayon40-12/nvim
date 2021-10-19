@@ -90,10 +90,10 @@ if !empty(filedir) | exec "cd ".gitdir | endif
 set viewoptions=cursor,folds,slash,unix
 if !empty(gitdir) | exec "set viewdir=".gitdir."/.git/view" | endif
 
-if !empty(filedir)
-  set path+=**
-  set wildignore+=**/target/**
-endif
+"if !empty(filedir)
+"  set path+=**
+"  set wildignore+=**/target/**
+"endif
 
 " create tag file
 "if empty(gitdir)
