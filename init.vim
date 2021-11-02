@@ -159,8 +159,8 @@ if exists("&termguicolors")
   syntax enable
   set termguicolors
   set background=dark
-  " Use Nord
-  colorscheme nord
+  " Use Monokai_pro
+  colorscheme monokai_pro
 
 
   if exists("&winblend")

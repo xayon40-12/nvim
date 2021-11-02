@@ -10,6 +10,7 @@ Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
 Plug 'arcticicestudio/nord-vim'
+Plug 'phanviet/vim-monokai-pro'
 Plug 'kovisoft/paredit'
 "
 " plugins for text object
