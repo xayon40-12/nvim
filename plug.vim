@@ -176,7 +176,7 @@ parser_configs.norg = {
         branch = "main"
     },
 }
-if vim.fn.has('macunix') then
+if vim.loop.os_uname().sysname == "Darwin" then
   require'nvim-treesitter.install'.compilers = { "gcc-11" }
 end
 require'nvim-treesitter.configs'.setup {
