@@ -20,12 +20,14 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 Plug 'sgur/vim-textobj-parameter'
 Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
+Plug 'simrat39/rust-tools.nvim'
 
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'nvim-neorg/neorg'
   "Plug 'nvim-lua/completion-nvim'
@@ -35,6 +37,7 @@ if has("nvim")
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'mfussenegger/nvim-dap'
   Plug 'chrisbra/unicode.vim'
   "Plug 'kristijanhusak/defx-git'
   "Plug 'kristijanhusak/defx-icons'
@@ -67,6 +70,8 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = "neorg" },
+    { name = "path" },
+    { name = 'buffer' },
 
     -- For vsnip user.
     -- { name = 'vsnip' },
@@ -77,7 +82,6 @@ cmp.setup({
     -- For ultisnips user.
     -- { name = 'ultisnips' },
 
-    { name = 'buffer' },
   }
 })
 
@@ -128,7 +132,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "hls", "rls", "texlab" }
+local servers = { "hls", "rls", "rust_analyzer", "texlab" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -149,14 +153,28 @@ nvim_lsp.texlab.setup {
   }
 }
 
-nvim_lsp.rls.setup {
+require('rust-tools').setup({})
+nvim_lsp.rust_analyzer.setup {
   settings = {
-    rust = {
-      unstable_features = true,
-      build_on_save = false,
-      all_features = true,
-    },
-  },
+    ["rust-analyzer"] = {
+      assist = {
+        importMergeBehavior = "last",
+        importPrefix = "by_self",
+      },
+      diagnostics = {
+        disabled = { "unresolved-import" }
+      },
+      cargo = {
+          loadOutDirsFromCheck = true
+      },
+      procMacro = {
+          enable = true
+      },
+      checkOnSave = {
+          command = "clippy"
+      },
+    }
+  }
 }
 
 local saga = require 'lspsaga'
