@@ -84,16 +84,16 @@ if !empty(filedir) | exec "cd ".filedir | endif
 
 " find git root dir
 let gitdir=system("git rev-parse --show-toplevel 2>/dev/null | tr -d '\\n'")
-if !empty(filedir) | exec "cd ".gitdir | endif
+if !empty(gitdir) | exec "cd ".gitdir | endif
 
 " view (vim save currend position in file and folds)
 set viewoptions=cursor,folds,slash,unix
 if !empty(gitdir) | exec "set viewdir=".gitdir."/.git/view" | endif
 
-"if !empty(filedir)
-"  set path+=**
-"  set wildignore+=**/target/**
-"endif
+if !empty(filedir)
+  set path+=**
+  set wildignore+=**/target/**
+endif
 
 " create tag file
 "if empty(gitdir)
