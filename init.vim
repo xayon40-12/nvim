@@ -88,7 +88,7 @@ if !empty(gitdir) | exec "cd ".gitdir | endif
 
 " view (vim save currend position in file and folds)
 set viewoptions=cursor,folds,slash,unix
-if !empty(gitdir) | exec "set viewdir=".gitdir."/.git/view" | endif
+if !empty(gitdir) | exec "set viewdir=\"".gitdir."/.git/view\"" | endif
 
 if !empty(filedir)
   set path+=**
@@ -170,6 +170,3 @@ if exists("&termguicolors")
 endif
 
 "}}}
-
-
-" vim: set foldmethod=marker foldlevel=0:
