@@ -29,7 +29,6 @@ set history=50          " keep 50 lines of command line history
 set tabpagemax=100      " set number of tabs
 set updatetime=250      " vim update time, useful for gitgutter
 set undofile            " keep undo history
-set undodir=~/.local/share/nvim/undo/
 set undolevels=1000
 set undoreload=10000
 set hidden              " permit to change file without saving the current one
@@ -90,7 +89,6 @@ if !empty(gitdir) | exec "cd ".gitdir | endif
 
 " view (vim save currend position in file and folds)
 set viewoptions=cursor,folds,slash,unix
-if !empty(gitdir) | exec "set viewdir=\"".gitdir."/.git/view\"" | endif
 
 if !empty(filedir)
   set path+=**

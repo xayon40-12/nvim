@@ -57,8 +57,8 @@ lua << EOF
 
 require('lualine').setup {
   options = {
-    theme = 'molokai'
-    --theme = 'palenight'
+    --theme = 'molokai'
+    theme = 'palenight'
   }
 }
 
