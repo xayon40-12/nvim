@@ -19,8 +19,15 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 Plug 'sgur/vim-textobj-parameter'
+
 Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
 Plug 'simrat39/rust-tools.nvim'
+Plug 'jubnzv/mdeval.nvim'
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+
+"status line
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'
@@ -47,6 +54,38 @@ endif
 call plug#end()
 
 lua << EOF
+
+require('lualine').setup {
+  options = {
+    theme = 'molokai'
+    --theme = 'palenight'
+  }
+}
+
+require 'mdeval'.setup({
+  -- Don't ask before executing code blocks
+  require_confirmation=false,
+  -- Change code blocks evaluation options.
+  eval_options = {
+    -- Set custom configuration for C++
+    cpp = {
+      command = {"clang++", "-std=c++20", "-O0"},
+      default_header = [[
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+      ]]
+    },
+    -- Add new configuration for Racket
+    racket = {
+      command = {"racket"},        -- Command to run interpreter
+      language_code = "racket",    -- Markdown language code
+      exec_type = "interpreted",   -- compiled or interpreted
+      extension = "rkt",           -- File extension for temporary files
+    },
+  },
+})
+vim.api.nvim_set_keymap('n', '<space>ce', "<cmd>lua require 'mdeval'.eval_code_block()<CR>", {silent = true, noremap = true})
 
 local cmp = require'cmp'
 cmp.setup({
@@ -194,6 +233,23 @@ parser_configs.norg = {
         branch = "main"
     },
 }
+
+parser_configs.norg_meta = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+        files = { "src/parser.c" },
+        branch = "main"
+    },
+}
+
+parser_configs.norg_table = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+        files = { "src/parser.c" },
+        branch = "main"
+    },
+}
+
 if vim.loop.os_uname().sysname == "Darwin" then
   require'nvim-treesitter.install'.compilers = { "gcc-11" }
 end
@@ -208,6 +264,8 @@ require'nvim-treesitter.configs'.setup {
   },
   ensure_installed = {
     "norg",
+    "norg_meta",
+    "norg_table",
     "toml",
     "yaml",
     "cpp",

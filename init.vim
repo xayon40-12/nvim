@@ -30,6 +30,8 @@ set tabpagemax=100      " set number of tabs
 set updatetime=250      " vim update time, useful for gitgutter
 set undofile            " keep undo history
 set undodir=~/.local/share/nvim/undo/
+set undolevels=1000
+set undoreload=10000
 set hidden              " permit to change file without saving the current one
 set display+=lastline
 set wildmenu            " display menu when searching
