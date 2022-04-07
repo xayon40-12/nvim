@@ -171,7 +171,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "hls", "rls", "rust_analyzer", "texlab" }
+local servers = { "hls", "rls", "rust_analyzer", "ccls", "texlab" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -253,6 +253,7 @@ parser_configs.norg_table = {
 if vim.loop.os_uname().sysname == "Darwin" then
   require'nvim-treesitter.install'.compilers = { "gcc-11" }
 end
+
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
