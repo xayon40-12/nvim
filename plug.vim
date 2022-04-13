@@ -24,6 +24,10 @@ Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
 Plug 'simrat39/rust-tools.nvim'
 Plug 'jubnzv/mdeval.nvim'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
+let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
+let g:tex_conceal_frac=1
+let g:tex_conceal="abdgm"
 
 "status line
 Plug 'nvim-lualine/lualine.nvim'
