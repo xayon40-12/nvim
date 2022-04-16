@@ -40,6 +40,7 @@ set shortmess+=c
 "let loaded_matchparen = 1
 set shell=zsh
 set backupskip=/tmp/*,/private/tmp/*
+set conceallevel=2
 
 " incremental substitution (neovim)
 if has('nvim')
