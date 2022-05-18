@@ -41,6 +41,7 @@ set shortmess+=c
 set shell=zsh
 set backupskip=/tmp/*,/private/tmp/*
 set conceallevel=2
+let mapleader=","
 
 " incremental substitution (neovim)
 if has('nvim')

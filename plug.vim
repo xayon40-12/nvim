@@ -21,6 +21,7 @@ Plug 'kana/vim-textobj-line'
 Plug 'sgur/vim-textobj-parameter'
 
 Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
+Plug 'https://git.sr.ht/~detegr/nvim-bqn'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'jubnzv/mdeval.nvim'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
