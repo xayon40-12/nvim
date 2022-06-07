@@ -163,6 +163,8 @@ if exists("&termguicolors")
   set background=dark
   " Use Monokai_pro
   colorscheme monokai_pro
+  "lua vim.g.tokyonight_style = 'night'
+  "colorscheme tokyonight
 
 
   if exists("&winblend")

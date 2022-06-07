@@ -11,6 +11,7 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
 Plug 'arcticicestudio/nord-vim'
 Plug 'phanviet/vim-monokai-pro'
+"Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'kovisoft/paredit'
 "
 " plugins for text object
@@ -20,18 +21,19 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 Plug 'sgur/vim-textobj-parameter'
 
-Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
-Plug 'https://git.sr.ht/~detegr/nvim-bqn'
+"Plug 'mlochbaum/BQN', {'rtp': 'editors/vim'}
+"Plug 'https://git.sr.ht/~detegr/nvim-bqn'
+"let g:nvim_bqn="bqn"
 Plug 'simrat39/rust-tools.nvim'
 Plug 'jubnzv/mdeval.nvim'
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
-let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
-let g:tex_conceal_frac=1
-let g:tex_conceal="abdgm"
+"Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+"let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
+"let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
+"let g:tex_conceal_frac=1
+"let g:tex_conceal="abdgm"
 
 "status line
-Plug 'nvim-lualine/lualine.nvim'
+"Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 if has("nvim")
@@ -42,6 +44,7 @@ if has("nvim")
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'nvim-neorg/neorg'
+  "Plug 'jbyuki/nabla.nvim'
   "Plug 'nvim-lua/completion-nvim'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
