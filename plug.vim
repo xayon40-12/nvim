@@ -70,30 +70,30 @@ require('lualine').setup {
   }
 }
 
-require 'mdeval'.setup({
-  -- Don't ask before executing code blocks
-  require_confirmation=false,
-  -- Change code blocks evaluation options.
-  eval_options = {
-    -- Set custom configuration for C++
-    cpp = {
-      command = {"clang++", "-std=c++20", "-O0"},
-      default_header = [[
-    #include <iostream>
-    #include <vector>
-    using namespace std;
-      ]]
-    },
-    -- Add new configuration for Racket
-    racket = {
-      command = {"racket"},        -- Command to run interpreter
-      language_code = "racket",    -- Markdown language code
-      exec_type = "interpreted",   -- compiled or interpreted
-      extension = "rkt",           -- File extension for temporary files
-    },
-  },
-})
-vim.api.nvim_set_keymap('n', '<space>ce', "<cmd>lua require 'mdeval'.eval_code_block()<CR>", {silent = true, noremap = true})
+-- require 'mdeval'.setup({
+--   -- Don't ask before executing code blocks
+--   require_confirmation=false,
+--   -- Change code blocks evaluation options.
+--   eval_options = {
+--     -- Set custom configuration for C++
+--     cpp = {
+--       command = {"clang++", "-std=c++20", "-O0"},
+--       default_header = [[
+--     #include <iostream>
+--     #include <vector>
+--     using namespace std;
+--       ]]
+--     },
+--     -- Add new configuration for Racket
+--     racket = {
+--       command = {"racket"},        -- Command to run interpreter
+--       language_code = "racket",    -- Markdown language code
+--       exec_type = "interpreted",   -- compiled or interpreted
+--       extension = "rkt",           -- File extension for temporary files
+--     },
+--   },
+-- })
+-- vim.api.nvim_set_keymap('n', '<space>ce', "<cmd>lua require 'mdeval'.eval_code_block()<CR>", {silent = true, noremap = true})
 
 local cmp = require'cmp'
 cmp.setup({
@@ -169,7 +169,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
