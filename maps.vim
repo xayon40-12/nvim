@@ -1,9 +1,12 @@
 " Description: Keymaps
 
 " fuzzy find
-nnoremap <silent> ;f <cmd>Telescope find_files<cr>
-nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
-nnoremap <silent> ;b <cmd>Telescope buffers<cr>
-nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
+nnoremap <silent> <leader>f <cmd>Telescope find_files<cr>
+nnoremap <silent> <leader>r <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
+nnoremap <silent> <leader>; <cmd>Telescope help_tags<cr>
 
-"nnoremap <leader>m :lua require("nabla").popup()<CR>
+
+nnoremap <silent> <leader>m <Plug>MarkdownPreviewToggle
+
+nnoremap <silent> <leader>n :lua require("nabla").popup()<CR>

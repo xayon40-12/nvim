@@ -36,6 +36,15 @@ Plug 'jubnzv/mdeval.nvim'
 "Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
+" Rendering markdown in browser, needs 'node' and 'yarn' installed
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+let g:mkdp_auto_start = 1
+let g:mkdp_command_for_global = 1
+"let g:mkdp_browser = 'Applications/Safari.app'
+"let g:mkdp_echo_preview_url = 1
+"let g:mkdp_port = '11234'
+
+
 if has("nvim")
   Plug 'hoob3rt/lualine.nvim'
   Plug 'neovim/nvim-lspconfig'
@@ -44,8 +53,7 @@ if has("nvim")
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'nvim-neorg/neorg'
-  "Plug 'jbyuki/nabla.nvim'
-  "Plug 'nvim-lua/completion-nvim'
+  Plug 'jbyuki/nabla.nvim'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
