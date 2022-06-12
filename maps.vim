@@ -10,3 +10,4 @@ nnoremap <silent> <leader>; <cmd>Telescope help_tags<cr>
 nnoremap <silent> <leader>m <Plug>MarkdownPreviewToggle
 
 nnoremap <silent> <leader>n :lua require("nabla").popup()<CR>
+nnoremap <silent> <leader>e :MdEval<CR>

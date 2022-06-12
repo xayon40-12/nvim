@@ -32,14 +32,12 @@ Plug 'jubnzv/mdeval.nvim'
 "let g:tex_conceal_frac=1
 "let g:tex_conceal="abdgm"
 
-"status line
-"Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Rendering markdown in browser, needs 'node' and 'yarn' installed
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 let g:mkdp_auto_start = 1
-let g:mkdp_command_for_global = 1
+"let g:mkdp_command_for_global = 1
 "let g:mkdp_browser = 'Applications/Safari.app'
 "let g:mkdp_echo_preview_url = 1
 "let g:mkdp_port = '11234'
@@ -78,30 +76,12 @@ require('lualine').setup {
   }
 }
 
--- require 'mdeval'.setup({
---   -- Don't ask before executing code blocks
---   require_confirmation=false,
---   -- Change code blocks evaluation options.
---   eval_options = {
---     -- Set custom configuration for C++
---     cpp = {
---       command = {"clang++", "-std=c++20", "-O0"},
---       default_header = [[
---     #include <iostream>
---     #include <vector>
---     using namespace std;
---       ]]
---     },
---     -- Add new configuration for Racket
---     racket = {
---       command = {"racket"},        -- Command to run interpreter
---       language_code = "racket",    -- Markdown language code
---       exec_type = "interpreted",   -- compiled or interpreted
---       extension = "rkt",           -- File extension for temporary files
---     },
---   },
--- })
--- vim.api.nvim_set_keymap('n', '<space>ce', "<cmd>lua require 'mdeval'.eval_code_block()<CR>", {silent = true, noremap = true})
+require 'mdeval'.setup({
+  -- Don't ask before executing code blocks
+  require_confirmation=false,
+  -- Change code blocks evaluation options.
+  eval_options = {},
+})
 
 local cmp = require'cmp'
 cmp.setup({
