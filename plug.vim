@@ -25,6 +25,7 @@ Plug 'sgur/vim-textobj-parameter'
 "Plug 'https://git.sr.ht/~detegr/nvim-bqn'
 "let g:nvim_bqn="bqn"
 Plug 'simrat39/rust-tools.nvim'
+Plug 'ollykel/v-vim'
 Plug 'jubnzv/mdeval.nvim'
 "Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 "let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
@@ -167,7 +168,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "hls", "rust_analyzer", "ccls", "texlab" }
+local servers = { "hls", "rust_analyzer", "ccls", "texlab", "vls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
@@ -256,6 +257,7 @@ require'nvim-treesitter.configs'.setup {
     "yaml",
     "cpp",
     "c",
+    "v",
     "haskell",
     "java",
     "rust",
