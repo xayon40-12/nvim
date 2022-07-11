@@ -101,7 +101,21 @@ cmp.setup({
   mapping = {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
-    --['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<S-CR>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ['<C-CR>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -213,14 +227,14 @@ nvim_lsp.rust_analyzer.setup {
   }
 }
 
-local saga = require 'lspsaga'
-saga.init_lsp_saga {
-  error_sign = '',
-  warn_sign = '',
-  hint_sign = '',
-  infor_sign = '',
-  border_style = "round",
-}
+-- local saga = require 'lspsaga'
+-- saga.init_lsp_saga {
+--   error_sign = '',
+--   warn_sign = '',
+--   hint_sign = '',
+--   infor_sign = '',
+--   border_style = "round",
+-- }
 
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
