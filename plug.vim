@@ -27,11 +27,6 @@ Plug 'sgur/vim-textobj-parameter'
 Plug 'simrat39/rust-tools.nvim'
 Plug 'ollykel/v-vim'
 Plug 'jubnzv/mdeval.nvim'
-"Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-"let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
-"let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
-"let g:tex_conceal_frac=1
-"let g:tex_conceal="abdgm"
 
 Plug 'kyazdani42/nvim-web-devicons'
 
@@ -227,14 +222,8 @@ nvim_lsp.rust_analyzer.setup {
   }
 }
 
--- local saga = require 'lspsaga'
--- saga.init_lsp_saga {
---   error_sign = '',
---   warn_sign = '',
---   hint_sign = '',
---   infor_sign = '',
---   border_style = "round",
--- }
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
 
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
