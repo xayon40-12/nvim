@@ -4,15 +4,13 @@ endif
 
 call plug#begin()
 
-Plug 'tpope/vim-surround'
 Plug 'vim-scripts/restore_view.vim'
-Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 "Plug 'tpope/vim-fugitive'
 Plug 'arcticicestudio/nord-vim'
 Plug 'phanviet/vim-monokai-pro'
-"Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'kovisoft/paredit'
+Plug 'tpope/vim-surround'
 "
 " plugins for text object
 Plug 'kana/vim-textobj-user'
@@ -45,20 +43,15 @@ if has("nvim")
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'nvim-neorg/neorg'
-  Plug 'jbyuki/nabla.nvim'
   Plug 'glepnir/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-  Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'mfussenegger/nvim-dap'
   Plug 'chrisbra/unicode.vim'
-  "Plug 'kristijanhusak/defx-git'
-  "Plug 'kristijanhusak/defx-icons'
-  "Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
 call plug#end()
